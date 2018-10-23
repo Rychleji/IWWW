@@ -1,0 +1,627 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="description" content="Dělení disků">
+    <meta name="author" content="Radim Nyč">
+
+    <title>Dělení disků, Radim Nyč</title>
+    <style>
+        body {
+            background-color: #F6F7FF;
+            color: black;
+            font-family: "Segoe UI", Verdana, Constantia;
+            font-size: 12pt;
+            height: 100%;
+            margin: auto;
+            padding: 0;
+            width: 100%;
+        }
+
+        .wrapper {
+            background-color: white;
+            margin: 0 auto;
+            max-width: 60em;
+        }
+
+        .nadpis {
+            padding: 25px 0 0;
+        }
+
+        #content {
+            padding: 5px 15px;
+        }
+
+        #intro #neg2, #hoyor, #gurav, #nator, #dorov, #tav, #zurgaa {
+            font-weight: bold;
+        }
+
+        .tusgai {
+            background: none repeat scroll 0 0 white;
+            border: 1px solid #C8D1D9;
+            font-family: "Courier New", monospace;
+            font-size: 12pt;
+        }
+
+        .hooshoi {
+            margin: 0 5px 0 0;
+            padding: 0 5px 0 0;
+        }
+
+        #footer {
+            clear: both;
+            color: white;
+            font-size: 1.1em;
+            margin: 20px 0 10px;
+            padding: 7px 0 10px;
+            text-align: center;
+            width: 100%;
+        }
+
+        h3 p ul li {
+            margin: 10px 0;
+            padding: 10px 0;
+        }
+
+        .list {
+            list-style: none outside none;
+        }
+
+        ol {
+            list-style: disc outside none;
+            text-align: left;
+        }
+
+        .code {
+            background-color: lightgray;
+            padding: 0.5em;
+            margin-top: 1em;
+            margin-bottom: 1em;
+        }
+
+        .mezeraNahore {
+            margin-top: 1em;
+        }
+
+    </style>
+
+</head>
+<body>
+<div class="wrapper" style="text-align:justify">
+    <h1 class="nadpis" style="text-align:center">Dělení disků</h1>
+    <h2 class="nadpis1" style="text-align:center">Radim Nyč, st47130@student.upce.cz</h2>
+    <h3 class="nadpis1" style="text-align:center">Datum referátu: 8.&nbsp;10.&nbsp;2018</h3>
+    <hr>
+
+    <div id="content">
+        <h2 id="intro">Úvod</h2>
+        <div>
+            <p>
+                Referát je zaměřený na odkrytí důvodů proč disky dělit na oddíly, jaké možnosti při dělení máme a&nbsp;jak
+                disky rozdělit.
+            </p>
+        </div>
+
+        <h2 id="neg2">Typy oddílů</h2>
+        <div>
+            <h3 id="neg3">Primární diskové oddíly</h3>
+            <div>
+                <p>
+                    Kvůli omezení BIOSu počítače lze nastavit pouze 4 primární diskové oddíly.
+                    Jsou to oddíly zapsané v&nbsp;MBR (master boot record) oblasti disku.<br/></p></div>
+            <h3 id="neg4">Rozšířené diskové oddíly</h3>
+            <div>
+                <p>
+                    Rozšířené (extended) oddíly byly zavedeny kvůli potřebě dělení disků na více než 4 oddíly se
+                    zachováním zpětné kompatibility. Rozšířený diskový oddíl nelze přímo používat, ale může obsahovat
+                    větší množství logických oddílů. Je to v&nbsp;podstatě „kontejner“ pro logické oddíly.<br/></p>
+            </div>
+            <h3 id="neg5">Logické diskové oddíly</h3>
+            <div>
+                <p>
+                    Logický oddíl je oddíl umístěný v&nbsp;rozšířeném diskovém oddílu. Logické oddíly na sebe musí
+                    navazovat. Každý logický oddíl obsahuje odkaz na jeho následující oddíl.
+                    <br/></p></div>
+
+        </div>
+        <p style="text-align: right"> [<a href="#zdroj">1</a>]
+
+
+        <hr>
+
+        <h2 id="hoyor">Důvody dělení disků</h2>
+        <div><p>Správně rozdělený disk na oddíly je více přehledný a&nbsp;při výběru správného souborového systému šetří
+            místo
+            na disku.
+            Rozdělený disk vede k&nbsp;lepší administraci a údržbě disku (defragmentace, správa místa, formátování).
+            Dále vyšší bezpečnosti dat, ochraně a&nbsp;izolaci uživatelských dat při havárii operačního systému a&nbsp;oddílů,
+            možnosti koexistence více operačních systémů a možnosti využívat výhody jednotlivých souborových systémů.
+            <br/>
+        </p>
+            <div class="mezeraNahore">
+                Následně je ovšem relativně obtížné přerozdělit místo na disku.
+            </div>
+        </div>
+        <p style="text-align: right"> [<a href="#zdroj">1</a>]
+
+        <hr>
+
+        <h2 id="hoyor2">Souborové systémy</h2>
+        <div>
+            <h3 id="hoyor21">ext2</h3>
+            <div>
+                <p>
+                    ext2 je v&nbsp;informatice souborový systém, který byl původně
+                    implementován pro jádro Linuxu, avšak je možné ho nalézt i&nbsp;v&nbsp;dalších operačních systémech.
+                    Ext2
+                    nepoužívá žurnálování.
+                    Souborový systém ext2 je přímým nástupcem souborového systému ext. Mezi jeho hlavní charakteristiky
+                    patří:
+                <ul>
+                    <li>lze vytvářet adresáře,</li>
+                    <li>lze vytvářet různé typy souborů: obyčejný soubor, speciální soubor (reprezentuje zařízení, je
+                        typu blokový a&nbsp;znakový), pojmenované roury, sockety,
+                    </li>
+                    <li>umožňuje používat pevné odkazy, symbolické odkazy</li>
+                    <li>pro každý soubor a&nbsp;adresář se ukládají práva UGO – vlastníka (user), skupiny (group),
+                        ostatních
+                        (other) a&nbsp;rozšířené atributy.
+                    </li>
+                </ul>
+                <br/>
+                <div class="mezeraNahore">
+                    Název souboru na ext2 může obsahovat libovolné znaky kromě znaku s&nbsp;kódem 0 a&nbsp;lomítka.
+                </div>
+                <pre><em>Tabulka 1. – limity ext2</em></pre>
+                <table border="1" cellpadding="0" cellspacing="0">
+                    <tbody>
+                    <tr>
+                        <td valign="top">
+                            <p>Velikost bloku:</p>
+                        </td>
+                        <td valign="top">
+                            <p>1 KiB</p>
+                        </td>
+                        <td valign="top">
+                            <p>2 KiB</p>
+                        </td>
+                        <td valign="top">
+                            <p>4 KiB</p>
+                        </td>
+                        <td valign="top">
+                            <p>8 KiB</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top">
+                            <p>Max. velikost souboru:</p>
+                        </td>
+                        <td valign="top">
+                            <p>16 GiB</p>
+                        </td>
+                        <td valign="top">
+                            <p>256 GiB</p>
+                        </td>
+                        <td valign="top">
+                            <p>2 TiB</p>
+                        </td>
+                        <td valign="top">
+                            <p>64 TiB</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td valign="top">
+                            <p>Max. velikost oddílu:</p>
+                        </td>
+                        <td valign="top">
+                            <p>2 TiB</p>
+                        </td>
+                        <td valign="top">
+                            <p>8 TiB</p>
+                        </td>
+                        <td valign="top">
+                            <p>16 TiB</p>
+                        </td>
+                        <td valign="top">
+                            <p>32 TiB</p>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+            <h3 id="hoyor22">ext3</h3>
+            <div>
+                <p>
+                    ext3 je žurnálovací systém souborů vytvořený pro operační systém Linux a&nbsp;je přímým a&nbsp;zpětně
+                    kompatibilním následníkem souborového systému ext2. Ext3 je výchozím souborovým systémem mnoha
+                    populárních linuxových distribucí.
+                    Souborový systém ext3 nabízí oproti svému předchůdci ext2:
+                <ul>
+                    <li>žurnálování (informace o&nbsp;dokončených operacích),</li>
+                    <li>indexy souborů v&nbsp;adresáři implementované stromy (do té doby se používal pouze lineární
+                        seznam, v&nbsp;ext3 se používá jen na malé adresáře),
+                    </li>
+                    <li>možnost změnit velikost souborového systému za běhu (od listopadu 2004).</li>
+                </ul>
+                <br/>
+                <pre><em>Tabulka 2.– limity ext3</em></pre>
+                <div>
+                    <table border="1" cellpadding="0" cellspacing="0">
+                        <tbody>
+                        <tr>
+                            <td valign="top">
+                                <p><strong>Velikost bloku</strong></p>
+                            </td>
+                            <td valign="top">
+                                <p><strong>Max. velikost souboru</strong></p>
+                            </td>
+                            <td valign="top">
+                                <p><strong>Max. velikost souborového systému</strong></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                                <p>1 kiB</p>
+                            </td>
+                            <td valign="top">
+                                <p>16 GiB</p>
+                            </td>
+                            <td valign="top">
+                                <p>2 TiB</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                                <p>2 kiB</p>
+                            </td>
+                            <td valign="top">
+                                <p>256 GiB</p>
+                            </td>
+                            <td valign="top">
+                                <p>8 TiB</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                                <p>4 kiB</p>
+                            </td>
+                            <td valign="top">
+                                <p>2 TiB</p>
+                            </td>
+                            <td valign="top">
+                                <p>16 TiB</p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                                <p>8 kiB</p>
+                            </td>
+                            <td valign="top">
+                                <p>2 TiB</p>
+                            </td>
+                            <td valign="top">
+                                <p>32 TiB</p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <h3 id="hoyor23">ext4</h3>
+                <div>
+                    <p>
+                        ext4 je žurnálovací souborový systém vyvinutý pro linuxové jádro, jehož vývoj začal 10. října
+                        2006 jako zpětně kompatibilní nástupce ext3 (přejímá všechny jeho výhody). Ext4 přináší mnoho
+                        novinek typických pro moderní souborové systémy, jako je odstranění limitů ext3 (velikost
+                        souborového systému, souborů, počtu souborů v adresáři), podporu extentů, prealokaci místa na
+                        disku, odloženou alokaci, kontrolní součet žurnálu, online defragmentaci, rychlejší kontrolu,
+                        multiblokový alokátor a&nbsp;zvýšenou přesnost uložených časových údajů a&nbsp;také samozřejmě
+                        zvýšení
+                        výkonu.
+                        <br/></p>
+                    <pre><em>Tabulka 3. – porovnání ext3 a&nbsp;ext2</em></pre>
+                    <table border="1" cellpadding="0" cellspacing="0">
+                        <tbody>
+                        <tr>
+                            <td valign="top">
+                                <p class="TextBody"><strong>&nbsp;</strong></p>
+                            </td>
+                            <td valign="top">
+                                <p class="TextBody"><strong>ext3</strong></p>
+                            </td>
+                            <td valign="top">
+                                <p class="TextBody"><strong>ext4</strong></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                                <p class="TextBody"><strong>Max. velikost oddílu</strong></p>
+                            </td>
+                            <td valign="top">
+                                <p class="TextBody"><strong>16 TiB</strong></p>
+                            </td>
+                            <td valign="top">
+                                <p class="TextBody"><strong>1 EiB</strong></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                                <p class="TextBody"><strong>Max. velikost souboru</strong></p>
+                            </td>
+                            <td valign="top">
+                                <p class="TextBody"><strong>2 TiB</strong></p>
+                            </td>
+                            <td valign="top">
+                                <p class="TextBody"><strong>16 TiB</strong></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                                <p class="TextBody"><strong>Max. počet souborů</strong></p>
+                            </td>
+                            <td valign="top">
+                                <p class="TextBody"><strong>4 miliardy</strong></p>
+                            </td>
+                            <td valign="top">
+                                <p class="TextBody"><strong>4 miliardy (232)</strong></p>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td valign="top">
+                                <p class="TextBody"><strong>Max. počet podadresářů</strong></p>
+                            </td>
+                            <td valign="top">
+                                <p class="TextBody"><strong>32&nbsp;768</strong></p>
+                            </td>
+                            <td valign="top">
+                                <p class="TextBody"><strong>neomezeno</strong></p>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+            </div>
+            <p style="text-align: right"> [<a href="#zdroj">2</a>]
+
+            <hr>
+
+
+            <h2 id="gurav">MBR/GPT</h2>
+            <div>
+
+                <div>
+                    <h3 id="gurav1">MBR</h3>
+                    <div>
+                        <p>
+                            Master boot record je zapsaný v&nbsp;prvním sektoru na disku a&nbsp;zabírá 512&nbsp;bajtů.
+                            Tento záznam obsahuje:
+                        <ul>
+                            <li>zavaděč operačního systému (BIOS mu předává řízení po startu PC),</li>
+                            <li>číselný identifikátor disku,</li>
+                            <li>tabulku rozdělení disku na logické části.</li>
+                        </ul>
+                        MBR je omezen, lze jej použít pro disky maximálně 2&nbsp;TB.<br/>
+                        <div class="mezeraNahore">
+                            Tabulka dovoluje zápis maximálně čtyř záznamů. Je–li potřeba disk rozdělit na více oddílů,
+                            musíme některý oddíl označit za rozšířený a&nbsp;do toho vložit oddíly logické.
+                        </div>
+                    </div>
+
+
+                    <p style="text-align: center"><a href="https://i.iinfo.cz/images/86/gpt-3.png"><img
+                            src="https://i.iinfo.cz/images/86/gpt-3.png"
+                            alt="schéma MBR"></a>
+                    </p>
+
+                    <p style="text-align: right"> [<a href="#zdroj">6</a>]
+
+                    <h3 id="gurav12">GPT</h3>
+                    <div>
+                        <p>
+                            Na rozdíl od MBR se GPT roztahuje rovnou na 34 sektorech a&nbsp;navíc je na disku ve dvou
+                            kopiích. Odstraňuje tedy jak problémy s počtem oddílů, tak jejich maximální velikosti. Pro
+                            adresy jednotlivých oddílů je vyhrazeno 32 sektorů a&nbsp;každý oddíl má k&nbsp;dispozici
+                            128&nbsp;B, v&nbsp;rámci kterých je pro adresu uvolněno 8&nbsp;B. To umožňuje adresovat 2^64
+                            sektorů, což je něco
+                            přes 9,4&nbsp;ZB. Celkem může GPT tabulka rozdělovat disk až na 128 oddílů.
+                            <br/></p></div>
+
+                    <p style="text-align: center"><a href="https://i.iinfo.cz/images/86/gpt-2.png"><img
+                            src="https://i.iinfo.cz/images/86/gpt-2.png"
+                            alt="schéma GPT"></a>
+                    </p>
+
+                    <p style="text-align: right"> [<a href="#zdroj">3</a>]
+
+                </div>
+
+                <hr>
+
+                <h2 id="fstab">fstab</h2>
+                <div>
+
+                    <p>
+                        Soubor /etc/fstab představuje pro uživatele jeden z&nbsp;nejdůležitějších konfiguračních souborů
+                        v&nbsp;systému, protože stanovuje kam se jaký disk (diskový oddíl) bude při startu systému
+                        připojovat.
+                        fstab slouží hlavně k&nbsp;připojování oddílů na pevném disku – různé externí disky, paměťové
+                        karty
+                        nebo flash disky jsou automaticky připojovány hned po vložení/připojení. fstab tak využijete
+                        pokud chcete například externí disk připojovat stále na stejné místo se stejným názvem.
+                        fstab má pevně danou strukturu – na každém řádku (kromě komentářů, které poznáte tak, že
+                        začínají mřížkou #) naleznete jeden disk (diskový oddíl). Každý řádek je navíc rozdělen do
+                        sloupců jejichž význam naleznete v následující tabulce.
+                        <br/></p>
+                    <h3 id="fstab1">Volby</h3>
+                    <div>
+                        <p>
+                        <ul>
+
+                            <li>noauto&nbsp;&nbsp;–&nbsp;&nbsp;
+                                Oddíl se nebude připojovat automaticky při startu systému.
+                            </li>
+                            <li>noexec&nbsp;&nbsp;–&nbsp;&nbsp;
+                                Soubory na oddíle nebudou spustitelné.
+                            </li>
+                            <li>ro&nbsp;&nbsp;–&nbsp;&nbsp;
+                                Připojení pouze ke čtení (read–only).
+                            </li>
+                            <li>rw&nbsp;&nbsp;–&nbsp;&nbsp;
+                                Připojení pro čtení i&nbsp;zápis (read–write).
+                            </li>
+                            <li>defaults&nbsp;&nbsp;–&nbsp;&nbsp;
+                                Jsou použity volby rw, suid, dev, exec, auto, nouser a&nbsp;async.
+                            </li>
+                            <li>user&nbsp;&nbsp;–&nbsp;&nbsp;
+                                Běžní uživatelé mohou oddíl připojit, ale ne odpojit.
+                            </li>
+                            <li>users&nbsp;&nbsp;–&nbsp;&nbsp;
+                                Běžní uživatelé mohou oddíl připojit i&nbsp;odpojit.
+                            </li>
+                            <li>nouser&nbsp;&nbsp;–&nbsp;&nbsp;
+                                Připojit a odpojit oddíl může pouze uživatel root.
+                            </li>
+                            <li>a&nbsp;další.</li>
+
+                        </ul>
+                        <br/></div>
+                    <h3 id="Toc160105023">
+                        Příklad souboru fstab</h3>
+                    <pre>
+      <code>kjn@webovyservis:/$ cat /etc/fstab</code>
+      <samp>
+      # /etc/fstab: static file system information.
+      #
+      # &lt;file system&gt; &lt;mount point&gt;   &lt;type&gt;  &lt;options&gt;             &lt;dump&gt;  &lt;pass&gt;
+      proc            /proc           proc    defaults              0       0
+      /dev/hda1       /               ext3    defaults,errors=remount-ro 0    1
+      /dev/hda6       /www            ext2    defaults              0       2
+      /dev/hda5       none            swap    sw                    0       0
+      /dev/hdc        /media/cdrom0   udf,iso9660 user,noauto       0       0</samp>
+    </pre>
+
+
+                </div>
+                <p style="text-align: right"> [<a href="#zdroj">1</a>][<a href="#zdroj">4</a>]
+
+                <hr>
+
+                <h2 id="nas">Nástroje pro správu</h2>
+                <div>
+                    <h3 id="nas1">fdisk</h3>
+                    <div>
+                        <p>
+                            Asi nejběžnější konzolový nástroj na dělení disků. Program nemá příliš komfortní ovládání.
+                            <br/></p></div>
+                    <h3 id="nas2">cfdisk</h3>
+                    <div>
+                        <p>
+                            Cfdisk umožňuje úpravu tabulky oddílů v&nbsp;textovém uživatelském rozhraní,
+                            takže je ze zmiňovaných konzolových nástrojů asi nejvíce „uživatelsky přívětivý“. Pomocí
+                            šipek nahoru a dolu volíme oddíly a&nbsp;pomocí šipek doleva a&nbsp;doprava volíme úkony.
+                            <br><a
+                                href="http://manual.aptosid.com/lib/images-en/cfdisk-en/cfdisk0-en.png">Odkaz na
+                            obrázek</a>.
+                            <br/></p></div>
+                    <h3 id="nas3">gdisk</h3>
+                    <div>
+                        <p>
+                            Skupina nástrojů „GPT fdisk“ zahrnuje nástroje gdisk, sgdisk a cgdisk. Používají se a
+                            vypadají velice podobně jako nástroje (s,c)fdisk, jen s tím rozdílem, že s nimi operujeme s
+                            tabulkou typu GPT.
+                            <br/></p></div>
+                    <h3 id="nas4">Parted</h3>
+                    <div>
+                        <p>
+                            Parted poslouží jako dobrá náhrada fdisku i&nbsp;gdisku, protože si hravě poradí s MPT i&nbsp;GPT.
+                            <br/></p></div>
+                    <h3 id="nas5">Gparted</h3>
+                    <div>
+                        <p>
+                            Grafický správce disků pro Linux. Pokud není na distribuci nainstalován, lze nainstalovat
+                            příkazem:<br>
+                        <div class="code">
+                            sudo apt-get install gparted<br>
+                        </div>
+
+                        Ovládání tohoto programu je v&nbsp;celku intuitivní. Program obsahuje menu, ale lze i&nbsp;na
+                        jednolivé
+                        oddíly (případně nepřiřazená volná místa) kliknout pravým tlačítkem myši. V&nbsp;takovém případě
+                        se
+                        objeví nabídka toho, co můžeme s&nbsp;diskem provést.
+                        <br/>
+                        <p style="text-align: center"><a href="http://gparted.org/screens/gparted-main-window.png"><img
+                                src="http://gparted.org/screens/gparted-main-window.png" alt="GParted"></a>
+                        </p></div>
+
+                </div>
+                <p style="text-align: right"> [<a href="#zdroj">5</a>]
+
+                <hr>
+
+                <div>
+                    <h2>Závěr</h2>
+                    <p>
+                        Dělení disků je užitečné pro organizaci, bezpečnost, zjednodušené přeinstalování operačního
+                        systému či sdílení disku více operačními systémy zároveň. Podle zamýšleného užití oddílu je
+                        třeba správně zvolit pozici na disku (často čtené soubory se vyplatí mít na začátku disku) a&nbsp;souborový
+                        systém. Podle velikosti disku je třeba se zamyslet, zda zvolit MBR, nebo GPT.<br>
+                    </p>
+                    <p>
+                        Samotné rozdělení disku není tak náročné a&nbsp;díky nástrojům k&nbsp;tomu určeným je to otázka
+                        několika minut.
+                    </p>
+                    <hr>
+
+
+                    <h2 id="doloo">Zdroje</h2>
+                    <ol id="zdroj">
+                        <li>[1] DYTRYCH, Karel. <em>Diskové oddíly, rozdělování na partitions, swap</em> [online].
+                            12.&nbsp;11.&nbsp;2007
+                            [cit.&nbsp;6.&nbsp;9.&nbsp;2018].<br>
+                            Dostupné z: <a href="http://school.kjn.cz/operacni-systemy/partitions.html">http://school.kjn.cz/operacni-systemy/partitions.html</a>.<br>
+                        </li>
+                        <li>[2] HEJDA, Václav. Souborové systémy v Linuxu. <em>LinuxEXPRES</em> [online].
+                            21.&nbsp;11.&nbsp;2011 [cit.&nbsp;6.&nbsp;9.&nbsp;2018].<br>
+                            ISSN&nbsp;1801-3996. Dostupné z: <a
+                                    href="https://www.linuxexpres.cz/blog/souborove-systemy-v-linuxu">https://www.linuxexpres.cz/blog/souborove-systemy-v-linuxu</a>.<br>
+                        </li>
+                        <li>[3] ŠTRAUCH, Adam. Na disky větší než 2 TB s GPT. <em>ROOT.cz</em> [online]. 20.&nbsp;9.&nbsp;2011
+                            [cit.&nbsp;7.&nbsp;9.&nbsp;2018].<br>
+                            ISSN&nbsp;1212-8309. Dostupné z: <a
+                                    href="https://www.root.cz/clanky/na-disky-vetsi-nez-2-tb-s-gpt/">https://www.root.cz/clanky/na-disky-vetsi-nez-2-tb-s-gpt/</a>.<br>
+                        </li>
+                        <li>[4] UBUNTU. Připojení disku/fstab.
+                            <em>wiki.Ubuntu.cz</em> [online]. 28.&nbsp;7.&nbsp;2012
+                            [cit.&nbsp;7.&nbsp;9.&nbsp;2018].<br>
+                            Dostupné z: <a
+                                    href="http://wiki.ubuntu.cz/p%C5%99ipojen%C3%AD_disku/fstab">http://wiki.ubuntu.cz/p%C5%99ipojen%C3%AD_disku/fstab</a>.<br>
+                        </li>
+                        <li>[5] DOLEŽEL, Luboš. Unixové nástroje – 25 ((s,c)fdisk, gdisk, parted a findmnt). <em>ABC
+                            Linuxu</em> [online]. 17.&nbsp;7.&nbsp;2013
+                            [cit.&nbsp;7.&nbsp;9.&nbsp;2018].<br>
+                            Dostupné z: <a
+                                    href="http://www.abclinuxu.cz/clanky/unixove-nastroje-24-s-c-fdisk-gdisk-parted-a-findmnt">http://www.abclinuxu.cz/clanky/unixove-nastroje-24-s-c-fdisk-gdisk-parted-a-findmnt</a>.<br>
+                        </li>
+                        <li>[6] Master Boot Record. <em>IT SLOVNÍK.cz</em> [online]. 19.&nbsp;4.&nbsp;2016
+                            [cit.&nbsp;7.&nbsp;9.&nbsp;2018].<br>
+                            Dostupné z: <a
+                                    href="https://it-slovnik.cz/pojem/master-boot-record">https://it-slovnik.cz/pojem/master-boot-record</a>.<br>
+                        </li>
+
+
+                    </ol>
+
+                    <hr>
+
+                </div>
+                <div id="footer">
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>
