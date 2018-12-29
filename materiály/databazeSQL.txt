@@ -1,0 +1,148 @@
+-- MySQL Workbench Forward Engineering
+
+SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
+SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
+SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
+
+
+-- -----------------------------------------------------
+USE `sempr` ;
+
+-- -----------------------------------------------------
+-- Table `mydb`.`registrovani_uzivatele`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sempr`.`registrovani_uzivatele` (
+  `uzivatelske_jmeno` VARCHAR(30) NOT NULL,
+  `email` VARCHAR(50) NOT NULL,
+  `jmeno_prijmeni` VARCHAR(100) NOT NULL,
+  `registrace` TIMESTAMP NOT NULL DEFAULT now(),
+  `admin` TINYINT NOT NULL DEFAULT 0,
+  `barva_jmena` INT NULL,
+  `heslo` VARCHAR(100) NOT NULL,
+  PRIMARY KEY (`uzivatelske_jmeno`),
+  UNIQUE INDEX `email_UNIQUE` (`email` ASC))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`clanky`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sempr`.`clanky` (
+  `id_clanku` INT NOT NULL,
+  `nazev` VARCHAR(45) NOT NULL,
+  `text_clanku` TEXT(10000) NOT NULL,
+  `autor_uzivatelske_jmeno` VARCHAR(30) NOT NULL,
+  PRIMARY KEY (`id_clanku`),
+  INDEX `fk_clanky_uzivatele1_idx` (`autor_uzivatelske_jmeno` ASC),
+  CONSTRAINT `fk_clanky_registrovani_uzivatele1`
+    FOREIGN KEY (`autor_uzivatelske_jmeno`)
+    REFERENCES `sempr`.`registrovani_uzivatele` (`uzivatelske_jmeno`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`obrazky`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sempr`.`obrazky` (
+  `id_obrazku` INT NOT NULL,
+  `obrazek` VARCHAR(255) NOT NULL,
+  `clanky_id` INT NOT NULL,
+  PRIMARY KEY (`id_obrazku`),
+  INDEX `fk_obrazky_clanky1_idx` (`clanky_id` ASC),
+  CONSTRAINT `fk_obrazky_clanky1`
+    FOREIGN KEY (`clanky_id`)
+    REFERENCES `sempr`.`clanky` (`id_clanku`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`komentare`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sempr`.`komentare` (
+  `id_komentare` INT NOT NULL,
+  `text_kom` VARCHAR(255) NOT NULL,
+  `pridano` timestamp NULL DEFAULT now(),
+  `clanky_id` INT NOT NULL,
+  `autor_uzivatelske_jmeno` VARCHAR(30) NULL,
+  `komentare_id_komentare` INT NOT NULL,
+  PRIMARY KEY (`id_komentare`),
+  INDEX `fk_komentare_clanky1_idx` (`clanky_id` ASC),
+  INDEX `fk_komentare_registrovani_uzivatele1_idx` (`autor_uzivatelske_jmeno` ASC),
+  INDEX `fk_komentare_komentare1_idx` (`komentare_id_komentare` ASC),
+  CONSTRAINT `fk_komentare_clanky1`
+    FOREIGN KEY (`clanky_id`)
+    REFERENCES `sempr`.`clanky` (`id_clanku`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_komentare_registrovani_uzivatele1`
+    FOREIGN KEY (`autor_uzivatelske_jmeno`)
+    REFERENCES `sempr`.`registrovani_uzivatele` (`uzivatelske_jmeno`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_komentare_komentare1`
+    FOREIGN KEY (`komentare_id_komentare`)
+    REFERENCES `sempr`.`komentare` (`id_komentare`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`oblibene_clanky`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sempr`.`oblibene_clanky` (
+  `uzivatelske_jmeno_clena` VARCHAR(30) NOT NULL,
+  `clanky_id` INT NOT NULL,
+  PRIMARY KEY (`uzivatelske_jmeno_clena`, `clanky_id`),
+  INDEX `fk_oblibene_clanky_clanky1_idx` (`clanky_id` ASC),
+  CONSTRAINT `fk_oblibene_clanky_registrovani_uzivatele1`
+    FOREIGN KEY (`uzivatelske_jmeno_clena`)
+    REFERENCES `sempr`.`registrovani_uzivatele` (`uzivatelske_jmeno`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_oblibene_clanky_clanky1`
+    FOREIGN KEY (`clanky_id`)
+    REFERENCES `sempr`.`clanky` (`id_clanku`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`tagy`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sempr`.`tagy` (
+  `tag` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`tag`))
+ENGINE = InnoDB;
+
+
+-- -----------------------------------------------------
+-- Table `mydb`.`clanky_has_tagy`
+-- -----------------------------------------------------
+CREATE TABLE IF NOT EXISTS `sempr`.`clanky_has_tagy` (
+  `clanky_id_clanku` INT NOT NULL,
+  `tagy_tag` VARCHAR(50) NOT NULL,
+  PRIMARY KEY (`clanky_id_clanku`, `tagy_tag`),
+  INDEX `fk_clanky_has_tagy_tagy1_idx` (`tagy_tag` ASC),
+  INDEX `fk_clanky_has_tagy_clanky1_idx` (`clanky_id_clanku` ASC),
+  CONSTRAINT `fk_clanky_has_tagy_clanky1`
+    FOREIGN KEY (`clanky_id_clanku`)
+    REFERENCES `sempr`.`clanky` (`id_clanku`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION,
+  CONSTRAINT `fk_clanky_has_tagy_tagy1`
+    FOREIGN KEY (`tagy_tag`)
+    REFERENCES `sempr`.`tagy` (`tag`)
+    ON DELETE NO ACTION
+    ON UPDATE NO ACTION)
+ENGINE = InnoDB;
+
+
+SET SQL_MODE=@OLD_SQL_MODE;
+SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
+SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS;
