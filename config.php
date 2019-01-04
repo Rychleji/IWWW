@@ -8,6 +8,11 @@ define('PROFILURL', 'profil.php');
 define('TAGYURL', 'tagy.php');
 define('TVORBACLANKUURL', 'tvorbaclanku.php');
 
+//Uživatelé
+define('REGUZTABULKA', 'registrovani_uzivatele');
+define('REGUZPK', 'uzivatelske_jmeno');
+
+//databaze
 define('DB_HOST', 'localhost');
 define('DB_USER', 'root');
 define('DB_PASSWORD', '');
