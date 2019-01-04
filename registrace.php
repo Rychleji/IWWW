@@ -1,12 +1,12 @@
 <?php
-include 'config.php';
+require_once 'config.php';
 ?>
 
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <title><?=PAGETITLE;?></title>
-    <link rel="stylesheet" type="text/css" href="registrace.css">
+    <link rel="stylesheet" type="text/css" href="css/registrace.css">
 </head>
 <body>
 <h1>Registrace</h1>
@@ -21,6 +21,12 @@ include 'config.php';
 
         <label for="psw-repeat"><b>Heslo znovu:</b></label>
         <input type="password" placeholder="Heslo" name="psw-repeat" required>
+
+        <label for="name"><b>Jméno a příjmení:</b></label>
+        <input type="text" placeholder="Jméno Příjmení" name="name" required>
+
+        <label for="email"><b>email:</b></label>
+        <input type="email" placeholder="something@domain.co" name="email" required>
         <hr>
 
         <button type="submit" class="registerbtn">Registrovat</button>

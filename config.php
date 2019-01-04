@@ -1,12 +1,5 @@
 <?php
 define('PAGETITLE', 'Studentské noviny!');
-define('CLANEKURL', 'clanek.php');
-define('INDEXURL', 'index.php');
-define('OBLIBCLANKYURL', 'oblibeneclanky.php');
-define('PRIHLASENIURL', 'prihlaseni.php');
-define('PROFILURL', 'profil.php');
-define('TAGYURL', 'tagy.php');
-define('TVORBACLANKUURL', 'tvorbaclanku.php');
 
 //Uživatelé
 define('REGUZTABULKA', 'registrovani_uzivatele');
