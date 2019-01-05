@@ -1,17 +1,14 @@
 <?php
 include_once 'config.php';
 ?>
-<html lang="en">
-    <body>
-        <h1>Přihlášení</h1>
 
-        <form method="post">
-            <input type="text" name="loginName" placeholder="Insert your email">
-            <input type="password" name="loginPassword" placeholder="Password">
-            <input type="submit" value="Log in">
-        </form>
-    </body>
-</html>
+<h1>Přihlášení</h1>
+
+<form method="post">
+    <input type="text" name="loginName" placeholder="Insert your email">
+    <input type="password" name="loginPassword" placeholder="Password">
+    <input type="submit" value="Log in">
+</form>
 
 <?php
 if (!empty($_POST) && !empty($_POST["loginName"]) && !empty($_POST["loginPassword"])) {

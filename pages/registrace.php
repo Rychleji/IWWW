@@ -1,9 +1,8 @@
 <?php
 include_once 'config.php';
 ?>
-<html lang="en">
 <head><link rel="stylesheet" type="text/css" href="../css/registrace.css"></head>
-<body>
+
 <h1>Registrace</h1>
 
 <form action="action_page.php">
@@ -31,7 +30,3 @@ include_once 'config.php';
         <p>Již máte účet? <a href="prihlaseni.php">Přihlásit</a>.</p>
     </div>
 </form>
-
-</body>
-</html>
-
