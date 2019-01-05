@@ -2,14 +2,14 @@
 include_once 'config.php';
 ?>
 
-<h1>Přihlášení</h1>
+<h2>Přihlášení</h2>
 
 <form method="post">
     <div class="container">
         <label for="username"><b>Uživatelské jméno</b></label>
-        <input type="text" name="loginName" placeholder="something@domain.co" name="username" required>
+        <input type="text" name="loginName" placeholder="uživatelské jméno" required>
         <label for="psw"><b>Heslo</b></label>
-        <input type="password" name="loginPassword" placeholder="heslo" name="psw" required>
+        <input type="password" name="loginPassword" placeholder="heslo" required>
         <hr>
         <button type="submit" class="registerbtn">Přihlásit</button>
     </div>
@@ -21,7 +21,6 @@ include_once 'config.php';
 
 <?php
 if (!empty($_POST) && !empty($_POST["loginName"]) && !empty($_POST["loginPassword"])) {
-
     //connect to database
     $conn = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -31,7 +30,7 @@ if (!empty($_POST) && !empty($_POST["loginName"]) && !empty($_POST["loginPasswor
     $stmt->bindParam(':uzJm', $_POST["loginName"]);
     $stmt->execute();
     $user = $stmt->fetch();
-    $shoda = $_POST["loginPassword"] == $user["heslo"];
+    $shoda = password_verify($_POST['loginPassword'], $user['heslo']);
     if (!$user) {
         echo "user not found";
     } else if($shoda){
@@ -42,7 +41,6 @@ if (!empty($_POST) && !empty($_POST["loginName"]) && !empty($_POST["loginPasswor
     }else{
         echo "password is wrong";
     }
-
 } else if (!empty($_POST)) {
     echo "Username and password are required";
 }

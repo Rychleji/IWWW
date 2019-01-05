@@ -32,11 +32,12 @@
 }
 
 .login_management{
-
+    padding: 20px 5px 0px 0px;
+    margin: 0px 0px -20px 0px;
 }
 
 .login_management a{
-    color: #00bf00;
+    color: #d8d8d8;
     border-style: outset;
     border-color: #000000;
     border-left-color: #666666;
@@ -44,7 +45,7 @@
 }
 
 .header_box{
-
+    color: #fafafa;
 }
 
 #header_web_title{
@@ -56,7 +57,7 @@
 }
 
 #navigation a {
-    color: #000000;
+    color: #d8d8d8;
     text-align: center;
     padding: 14px 16px;
     text-decoration: none;
@@ -72,17 +73,18 @@ p{
 
 header{
     background-color: #757575;
-    margin: 0px;
+    margin: 0px 1%;
 }
 
 footer{
+    color: #d8d8d8;
     background-color: #757575;
-    margin: 0px;
+    margin: 0px 1%;
 }
 
 main{
     background-color: #fafafa;
-    margin: 0px;
+    margin: 0px 7%;
 }
 
 body{

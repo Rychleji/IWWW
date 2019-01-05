@@ -9,7 +9,7 @@ include "config.php";
 </head>
 <body>
 <header>
-    <div class="login_management full_width_wrapper">
+    <div class="login_management full_width_wrapper right">
         <a href="<?= BASE_URL . "?page=prihlaseni" ?>">Přihlášení</a>
         <a href="<?= BASE_URL . "?page=registrace" ?>">Registrace</a>
     </div>
@@ -38,12 +38,8 @@ include "config.php";
 </main>
 <footer>
     <div class="full_width_wrapper">
-        konec stranky ..
+        <h3>Radim Nyč</h3>
     </div>
 </footer>
 </body>
 </html>
-
-<?php
-//echo password_hash("rasmuslerdorf", PASSWORD_BCRYPT);
-?>
