@@ -1,2 +1,0 @@
-<?php
-echo "Obsah nenalezen";

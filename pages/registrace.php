@@ -1,13 +1,8 @@
 <?php
-require_once 'config.php';
+include_once 'config.php';
 ?>
-
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title><?=PAGETITLE;?></title>
-    <link rel="stylesheet" type="text/css" href="css/registrace.css">
-</head>
+<head><link rel="stylesheet" type="text/css" href="../css/registrace.css"></head>
 <body>
 <h1>Registrace</h1>
 

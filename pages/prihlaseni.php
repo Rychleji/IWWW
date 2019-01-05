@@ -1,19 +1,19 @@
 <?php
-require_once 'config.php';
+include_once 'config.php';
 ?>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title><?=PAGETITLE;?></title>
-</head>
-<body>
-<h1>Přihlášení</h1>
+    <body>
+        <h1>Přihlášení</h1>
 
-</body>
+        <form method="post">
+            <input type="text" name="loginName" placeholder="Insert your email">
+            <input type="password" name="loginPassword" placeholder="Password">
+            <input type="submit" value="Log in">
+        </form>
+    </body>
 </html>
 
 <?php
-
 if (!empty($_POST) && !empty($_POST["loginName"]) && !empty($_POST["loginPassword"])) {
 
     //connect to database
@@ -40,15 +40,4 @@ if (!empty($_POST) && !empty($_POST["loginName"]) && !empty($_POST["loginPasswor
 } else if (!empty($_POST)) {
     echo "Username and password are required";
 }
-
-
 ?>
-
-
-<form method="post">
-
-    <input type="text" name="loginName" placeholder="Insert your email">
-    <input type="password" name="loginPassword" placeholder="Password">
-    <input type="submit" value="Log in">
-
-</form>

@@ -1,0 +1,94 @@
+.center {
+    text-align: center;
+}
+
+.right {
+    text-align: right;
+}
+
+.left {
+    text-align: left;
+}
+
+.articleTextColor {
+    color: #000000;
+}
+
+.articleTextSize {
+    font-size: 100%;
+}
+
+.articleTitleColor{
+    color: #000000;
+}
+
+.articleTitleSize{
+    font-size: 150%;
+}
+
+.full_width_wrapper{
+    width: 100%;
+    margin: 0 auto;
+}
+
+.login_management{
+
+}
+
+.login_management a{
+    color: #00bf00;
+    border-style: outset;
+    border-color: #000000;
+}
+
+.header_box{
+
+}
+
+#header_web_title{
+    font-size: 200%;
+}
+
+#navigation{
+    font-size: 120%;
+}
+
+#navigation a {
+    color: #000000;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+#navigation a:hover {
+
+}
+
+p{
+
+}
+
+header{
+    background-color: #757575;
+    margin: 0px;
+}
+
+footer{
+    background-color: #757575;
+    margin: 0px;
+}
+
+main{
+    background-color: #fafafa;
+    margin: 0px;
+}
+
+body{
+    background-image: url("../pic/background_PIXNIO.jpeg");
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: 100%;
+    margin: 0px;
+}
+
