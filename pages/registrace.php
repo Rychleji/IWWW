@@ -1,11 +1,9 @@
 <?php
 include_once 'config.php';
 ?>
-<head><link rel="stylesheet" type="text/css" href="../css/registrace.css"></head>
-
 <h1>Registrace</h1>
 
-<form action="action_page.php">
+<form method="post">
     <div class="container">
         <label for="username"><b>Uživatelské jméno:</b></label>
         <input type="text" placeholder="Uživatelské jméno" name="username" required>
@@ -27,6 +25,6 @@ include_once 'config.php';
     </div>
 
     <div class="container signin">
-        <p>Již máte účet? <a href="prihlaseni.php">Přihlásit</a>.</p>
+        <p>Již máte účet? <a href="<?= BASE_URL . "?page=prihlaseni" ?>">Přihlásit se</a>.</p>
     </div>
 </form>

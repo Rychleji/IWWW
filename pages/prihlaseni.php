@@ -5,9 +5,18 @@ include_once 'config.php';
 <h1>Přihlášení</h1>
 
 <form method="post">
-    <input type="text" name="loginName" placeholder="Insert your email">
-    <input type="password" name="loginPassword" placeholder="Password">
-    <input type="submit" value="Log in">
+    <div class="container">
+        <label for="username"><b>Uživatelské jméno</b></label>
+        <input type="text" name="loginName" placeholder="something@domain.co" name="username" required>
+        <label for="psw"><b>Heslo</b></label>
+        <input type="password" name="loginPassword" placeholder="heslo" name="psw" required>
+        <hr>
+        <button type="submit" class="registerbtn">Přihlásit</button>
+    </div>
+
+    <div class="container signin">
+        <p>Nemáte účet? <a href="<?= BASE_URL . "?page=registrace" ?>">Registrovat se</a>.</p>
+    </div>
 </form>
 
 <?php
