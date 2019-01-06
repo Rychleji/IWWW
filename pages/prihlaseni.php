@@ -1,7 +1,3 @@
-<?php
-include_once 'config.php';
-?>
-
 <h2>Přihlášení</h2>
 
 <form method="post">

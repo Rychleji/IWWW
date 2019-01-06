@@ -1,4 +1,6 @@
 <?php
+ob_start();
+session_start();
 include "config.php";
 ?>
 
@@ -10,8 +12,14 @@ include "config.php";
 <body>
 <header>
     <div class="login_management full_width_wrapper right">
-        <a href="<?= BASE_URL . "?page=prihlaseni" ?>">Přihlášení</a>
-        <a href="<?= BASE_URL . "?page=registrace" ?>">Registrace</a>
+        <?php if (!empty($_SESSION["username"])) { ?>
+            <p><?= $_SESSION["username"]?></p>
+            <a href="<?= BASE_URL . "?page=logout" ?>">Logout</a>
+        <?php } else { ?>
+            <a href="<?= BASE_URL . "?page=prihlaseni" ?>">Přihlášení</a>
+            <a href="<?= BASE_URL . "?page=registrace" ?>">Registrace</a>
+        <?php } ?>
+
     </div>
     <div class="header_box_bg header_box">
             <div id="header_web_title"><h1><?= PAGETITLE; ?></h1></div>

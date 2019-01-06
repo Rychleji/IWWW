@@ -1,6 +1,3 @@
-<?php
-include_once 'config.php';
-?>
 <h2>Registrace</h2>
 
 <form method="post">

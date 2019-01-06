@@ -41,24 +41,6 @@ CREATE TABLE IF NOT EXISTS `sempr`.`clanky` (
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
-
--- -----------------------------------------------------
--- Table `mydb`.`obrazky`
--- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `sempr`.`obrazky` (
-  `id_obrazku` INT NOT NULL,
-  `obrazek` VARCHAR(255) NOT NULL,
-  `clanky_id` INT NOT NULL,
-  PRIMARY KEY (`id_obrazku`),
-  INDEX `fk_obrazky_clanky1_idx` (`clanky_id` ASC),
-  CONSTRAINT `fk_obrazky_clanky1`
-    FOREIGN KEY (`clanky_id`)
-    REFERENCES `sempr`.`clanky` (`id_clanku`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
-ENGINE = InnoDB;
-
-
 -- -----------------------------------------------------
 -- Table `mydb`.`komentare`
 -- -----------------------------------------------------
