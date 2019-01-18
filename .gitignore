@@ -1,4 +1,6 @@
 .idea/
 def/
 *.bak
-articleImages/*
+articleImages/*.jpg
+articleImages/*.jpeg
+articleImages/*.png
