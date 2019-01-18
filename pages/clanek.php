@@ -11,7 +11,12 @@ $stmt->bindParam(':idCl', $_GET["clanek"]);
 $stmt->execute();
 $clanek = $stmt->fetch();
 ?>
-<h3><?php echo $clanek['nazev']; ?></h3>
-<div class="fr-view">
-    <?php echo $clanek['text_clanku']; ?>
-</div>
+
+<article>
+    <h3><?php echo $clanek['nazev']; ?></h3>
+    <br>
+    <div class="fr-view">
+        <?php echo $clanek['text_clanku']; ?>
+    </div>
+
+</article>

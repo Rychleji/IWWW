@@ -63,14 +63,6 @@
     text-decoration: none;
 }
 
-#navigation a:hover {
-
-}
-
-p{
-
-}
-
 header{
     background-color: #757575;
     margin: 0px 1%;
@@ -155,3 +147,30 @@ a {
     text-align: center;
 }
 /*-registrace*/
+
+/*+náhled článku*/
+#kontejner_nahledu{
+
+}
+
+#nahled {
+    alignment: center;
+    text-align: center;
+    margin: 3px 5px 3px 5px;
+    border-style: solid;
+    border-color: #000000;
+    border-left-color: #666666;
+    border-top-color: #666666;
+    width: 400px;
+    height: 70px;
+    display: inline-block;
+}
+
+#nahled a{
+    color: #000000;
+    text-align: center;
+    alignment: center;
+    padding: 0px 0 0px 0;
+    text-decoration: none;
+}
+/*-náhled článku*/
