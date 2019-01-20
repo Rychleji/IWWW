@@ -93,8 +93,36 @@ body{
     margin: 0px;
 }
 
-h1, h2, h3, form, p, a, div, ul, li, hr, br, nav{
+h1, h2, h3, h4, h5, h6, form, p, a, div, ul, li, hr, br, nav{
     margin: 0px;
+    padding: 0;
+    box-sizing: unset;
+    resize: none;
+    justify-self: unset;
+}
+
+table {
+    border-spacing: 5px;
+}
+
+table, th, td {
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 15px;
+}
+
+table.tb1 tr:nth-child(even) {
+    background-color: #eee;
+}
+table.tb1 tr:nth-child(odd) {
+    background-color: #fff;
+}
+table.tb1 th {
+    color: white;
+    background-color: black;
 }
 
 .mezera{
@@ -175,18 +203,14 @@ a {
     width: 400px;
     height: 70px;
     display: inline-block;
+    padding: 10px;
 }
 
 .nahled a{
     color: #000000;
     text-align: center;
     alignment: center;
-    padding: 0px 0 0px 0;
     text-decoration: none;
-}
-
-.nahled h3{
-    padding-top: 5%;
 }
 /*-náhled článku*/
 
@@ -196,7 +220,7 @@ a {
     margin-right: 5%;
     font-size: medium;
     font-family: "Times New Roman";
-
+    padding: 3%;
 }
 /*-clanek*/
 

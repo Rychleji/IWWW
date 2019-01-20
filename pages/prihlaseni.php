@@ -21,7 +21,7 @@ if (!empty($_POST) && !empty($_POST["loginName"]) && !empty($_POST["loginPasswor
     $conn = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     //get user by email and password
-    $stmt = $conn->prepare("SELECT uzivatelske_jmeno, heslo, email FROM " . REGUZTABULKA .
+    $stmt = $conn->prepare("SELECT uzivatelske_jmeno, heslo, admin FROM " . REGUZTABULKA .
                                       " WHERE " . REGUZPK . " = :uzJm");
     $stmt->bindParam(':uzJm', $_POST["loginName"]);
     $stmt->execute();
@@ -32,7 +32,9 @@ if (!empty($_POST) && !empty($_POST["loginName"]) && !empty($_POST["loginPasswor
     } else if($shoda){
         echo "Welcome back: " . $user["uzivatelske_jmeno"];
         $_SESSION["username"] = $user["uzivatelske_jmeno"];
-        $_SESSION["isAdmin"] = $user["admin"];
+        if ($user["admin"] != 0) {
+            $_SESSION["isAdmin"] = 1;
+        }
         header("Location:" . BASE_URL);
     }else{
         echo "password is wrong";

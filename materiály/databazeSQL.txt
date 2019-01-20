@@ -37,8 +37,8 @@ CREATE TABLE IF NOT EXISTS `sempr`.`clanky` (
   CONSTRAINT `fk_clanky_registrovani_uzivatele1`
     FOREIGN KEY (`autor_uzivatelske_jmeno`)
     REFERENCES `sempr`.`registrovani_uzivatele` (`uzivatelske_jmeno`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 -- -----------------------------------------------------
@@ -58,18 +58,18 @@ CREATE TABLE IF NOT EXISTS `sempr`.`komentare` (
   CONSTRAINT `fk_komentare_clanky1`
     FOREIGN KEY (`clanky_id`)
     REFERENCES `sempr`.`clanky` (`id_clanku`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_komentare_registrovani_uzivatele1`
     FOREIGN KEY (`autor_uzivatelske_jmeno`)
     REFERENCES `sempr`.`registrovani_uzivatele` (`uzivatelske_jmeno`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_komentare_komentare1`
     FOREIGN KEY (`komentare_id_komentare`)
     REFERENCES `sempr`.`komentare` (`id_komentare`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -84,13 +84,13 @@ CREATE TABLE IF NOT EXISTS `sempr`.`oblibene_clanky` (
   CONSTRAINT `fk_oblibene_clanky_registrovani_uzivatele1`
     FOREIGN KEY (`uzivatelske_jmeno_clena`)
     REFERENCES `sempr`.`registrovani_uzivatele` (`uzivatelske_jmeno`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_oblibene_clanky_clanky1`
     FOREIGN KEY (`clanky_id`)
     REFERENCES `sempr`.`clanky` (`id_clanku`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
@@ -115,15 +115,18 @@ CREATE TABLE IF NOT EXISTS `sempr`.`clanky_has_tagy` (
   CONSTRAINT `fk_clanky_has_tagy_clanky1`
     FOREIGN KEY (`clanky_id_clanku`)
     REFERENCES `sempr`.`clanky` (`id_clanku`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION,
+    ON DELETE CASCADE
+    ON UPDATE CASCADE,
   CONSTRAINT `fk_clanky_has_tagy_tagy1`
     FOREIGN KEY (`tagy_tag`)
     REFERENCES `sempr`.`tagy` (`tag`)
-    ON DELETE NO ACTION
-    ON UPDATE NO ACTION)
+    ON DELETE CASCADE
+    ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
+INSERT INTO `registrovani_uzivatele` (`uzivatelske_jmeno`, `email`, `jmeno_prijmeni`, `registrace`, `admin`, `barva_jmena`, `heslo`) VALUES ('test', 'test@test.ts', 'Test Ucet', CURRENT_TIMESTAMP, '0', NULL, 'test123');
+INSERT INTO `clanky` (`id_clanku`, `nazev`, `text_clanku`, `autor_uzivatelske_jmeno`) VALUES ('0', 'test clanek', '', 'test');
+INSERT INTO `komentare` (`id_komentare`, `text_kom`, `pridano`, `clanky_id`, `autor_uzivatelske_jmeno`, `komentare_id_komentare`) VALUES ('0', '0', '2019-01-19 19:42:26', '0', NULL, NULL);
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;

@@ -29,6 +29,9 @@ include "config.php";
                 <?php if (!empty($_SESSION["username"])) { ?>
                     <a href="<?= BASE_URL . "?page=tvorbaclanku" ?>">Přidat článek</a>
                 <?php }?>
+                <?php if (!empty($_SESSION["isAdmin"])) { ?>
+                    <a href="<?= BASE_URL . "?page=administrace" ?>">administrace</a>
+                <?php }?>
                 <hr>
             </nav>
     </div>

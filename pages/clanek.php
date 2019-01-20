@@ -88,6 +88,9 @@ if (!empty($_POST)) {
             <p class='cmmnt-content'><?php echo $row['text_kom'] ?></p>
             <a href="<?= BASE_URL . "?page=profil&uzivatel=".$row['autor_uzivatelske_jmeno'] ?>" class='cmmnt-content userlink'><?= $row['autor_uzivatelske_jmeno']?></a>
             <a href="<?= BASE_URL . "?page=odpoved&kom=" . $row['id_komentare']."&cl=".$_GET['clanek']?>" class='cmmnt-content'>Odpovědět</a>
+            <?php if(!empty($_SESSION["isAdmin"])){?>
+            <a href="<?= BASE_URL . "?page=administrace&ed=1&kom=" . $row['id_komentare']?>" class='cmmnt-content'>Smazat</a>
+            <?php } ?>
             <br/>
             <?php
             $stmt2 = $conn->prepare("SELECT * FROM komentare WHERE komentare_id_komentare = :idKom ORDER BY pridano ASC");
@@ -100,6 +103,9 @@ if (!empty($_POST)) {
                     <p class='cmmnt-content pubdate'><?php echo $row2['pridano'] ?></p>
                     <p class='cmmnt-content'><?php echo $row2['text_kom'] ?></p>
                     <a href="<?= BASE_URL . "?page=profil&uzivatel=".$row2['autor_uzivatelske_jmeno'] ?>" class='cmmnt-content userlink'><?= $row2['autor_uzivatelske_jmeno']?></a>
+                    <?php if(!empty($_SESSION["isAdmin"])){?>
+                        <a href="<?= BASE_URL . "?page=administrace&ed=1&kom=" . $row2['id_komentare']?>" class='cmmnt-content'>Smazat</a>
+                    <?php } ?>
                 </div>
                 <br/>
 
