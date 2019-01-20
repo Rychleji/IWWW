@@ -47,10 +47,10 @@ ENGINE = InnoDB;
 CREATE TABLE IF NOT EXISTS `sempr`.`komentare` (
   `id_komentare` INT NOT NULL,
   `text_kom` VARCHAR(255) NOT NULL,
-  `pridano` timestamp NULL DEFAULT now(),
+  `pridano` timestamp NOT NULL DEFAULT now(),
   `clanky_id` INT NOT NULL,
   `autor_uzivatelske_jmeno` VARCHAR(30) NULL,
-  `komentare_id_komentare` INT NOT NULL,
+  `komentare_id_komentare` INT NULL,
   PRIMARY KEY (`id_komentare`),
   INDEX `fk_komentare_clanky1_idx` (`clanky_id` ASC),
   INDEX `fk_komentare_registrovani_uzivatele1_idx` (`autor_uzivatelske_jmeno` ASC),

@@ -32,7 +32,7 @@ if (!empty($_POST) && !empty($_POST["loginName"]) && !empty($_POST["loginPasswor
     } else if($shoda){
         echo "Welcome back: " . $user["uzivatelske_jmeno"];
         $_SESSION["username"] = $user["uzivatelske_jmeno"];
-        $_SESSION["email"] = $user["email"];
+        $_SESSION["isAdmin"] = $user["admin"];
         header("Location:" . BASE_URL);
     }else{
         echo "password is wrong";

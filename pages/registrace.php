@@ -41,16 +41,6 @@ if (!empty($_POST)) {
     $stmt->bindParam(':pass', $newPass);
     $stmt->execute();
 
-    /*$shoda = $_POST["loginPassword"] == $user["heslo"];
-    if (!$user) {
-        echo "user not found";
-    } else if($shoda){
-        echo "Welcome back: " . $user["uzivatelske_jmeno"];
-        $_SESSION["username"] = $user["uzivatelske_jmeno"];
-        $_SESSION["email"] = $user["email"];
-        header("Location:" . BASE_URL);
-    }else{
-        echo "password is wrong";
-    }*/
+    header("Location:" . BASE_URL);
 }
 ?>

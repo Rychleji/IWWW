@@ -13,7 +13,7 @@ include "config.php";
 <header>
     <div class="login_management full_width_wrapper right">
         <?php if (!empty($_SESSION["username"])) { ?>
-            <p><?= $_SESSION["username"]?></p>
+            <a href="<?= BASE_URL . "?page=profil" ?>"><?= $_SESSION["username"]?></a>
             <a href="<?= BASE_URL . "?page=logout" ?>">Logout</a>
         <?php } else { ?>
             <a href="<?= BASE_URL . "?page=prihlaseni" ?>">Přihlášení</a>
@@ -26,8 +26,9 @@ include "config.php";
             <nav id="navigation">
                 <a href="<?= BASE_URL ?>">Úvod</a>
                 <a href="<?= BASE_URL . "?page=tagy" ?>">Tagy</a>
-                <a href="<?= BASE_URL . "?page=tvorbaclanku" ?>">Přidat článek</a>
-                <a href="<?= BASE_URL . "?page=profil" ?>">Profil</a>
+                <?php if (!empty($_SESSION["username"])) { ?>
+                    <a href="<?= BASE_URL . "?page=tvorbaclanku" ?>">Přidat článek</a>
+                <?php }?>
                 <hr>
             </nav>
     </div>
