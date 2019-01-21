@@ -4,3 +4,5 @@ def/
 articleImages/*.jpg
 articleImages/*.jpeg
 articleImages/*.png
+uploads/*.xml
+*.xml

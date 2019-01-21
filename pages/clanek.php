@@ -12,8 +12,9 @@ $stmt->execute();
 $clanek = $stmt->fetch();
 ?>
 
-<article>
-    <h3 class="center"><?php echo $clanek['nazev']; ?></h3>
+<article class="clanek">
+    <h3 class="center nadpis"><?php echo $clanek['nazev']; ?></h3>
+    <a href="<?= BASE_URL . "?page=export&cl=".$_GET["clanek"] ?>"><img class="icons" src="pic/XMLico.png"/></a>
     <?php
     $stmt01 = $conn->prepare("SELECT * FROM oblibene_clanky WHERE clanky_id = :idCl AND uzivatelske_jmeno_clena = :uz");
 
@@ -29,7 +30,7 @@ $clanek = $stmt->fetch();
         </div>
     <?php } ?>
     <br>
-    <div class="fr-view clanek">
+    <div class="fr-view">
         <?php echo $clanek['text_clanku']; ?>
     </div>
     <div class="right">

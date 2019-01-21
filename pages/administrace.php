@@ -47,6 +47,8 @@ if(!empty($_GET['ed'])){
 
     <table class='tb1' style="width:100%">
         <caption style='text-align: left'><b>Articles</b></caption>
+        <a href="<?= "pages/export.php" ?>"><img class="icons" style="margin: 3px" src="pic/XMLico.png"/></a>
+        <a href="<?= BASE_URL . "?page=import" ?>"><img class="icons" style="margin: 3px" src="pic/importico.png"/></a>
         <tr>
             <th>Name</th>
             <th>Author</th>

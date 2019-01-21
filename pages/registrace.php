@@ -29,18 +29,23 @@
 <?php
 if (!empty($_POST)) {
     //connect to database
-    $conn = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    //get user by email and password
-    $newPass = password_hash($_POST["psw"], PASSWORD_BCRYPT);
-    $stmt = $conn->prepare("INSERT INTO " . REGUZTABULKA . "(uzivatelske_jmeno, email, jmeno_prijmeni, heslo) 
-        values (:uzJm, :email, :jmPr, :pass )");
-    $stmt->bindParam(':uzJm', $_POST["username"]);
-    $stmt->bindParam(':email', $_POST["email"]);
-    $stmt->bindParam(':jmPr', $_POST["name"]);
-    $stmt->bindParam(':pass', $newPass);
-    $stmt->execute();
 
-    header("Location:" . BASE_URL);
+    if($_POST['psw'] == $_POST['psw-repeat']) {
+        $conn = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        //get user by email and password
+        $newPass = password_hash($_POST["psw"], PASSWORD_BCRYPT);
+        $stmt = $conn->prepare("INSERT INTO " . REGUZTABULKA . "(uzivatelske_jmeno, email, jmeno_prijmeni, heslo) 
+            values (:uzJm, :email, :jmPr, :pass )");
+        $stmt->bindParam(':uzJm', $_POST["username"]);
+        $stmt->bindParam(':email', $_POST["email"]);
+        $stmt->bindParam(':jmPr', $_POST["name"]);
+        $stmt->bindParam(':pass', $newPass);
+        $stmt->execute();
+
+        header("Location:" . BASE_URL);
+    }else{
+        echo 'Hesla nejsou stejná';
+    }
 }
 ?>
