@@ -1,10 +1,9 @@
 <?php
 require_once "../config.php";
-// setting up PDO
+
 $conn = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME, DB_USER, DB_PASSWORD);
 $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-// prepare all queries...
 if (isset($_GET['cl'])) {
     $stmt = $conn->prepare("SELECT * FROM clanky where id_clanku=:idClanku");
     $stmt->bindParam(':idClanku', $_GET['cl']);
@@ -15,7 +14,7 @@ if (isset($_GET['cl'])) {
 $stmt->execute();
 $clanky=$stmt->fetchAll(PDO::FETCH_ASSOC);
 
-
+//převzato z: https://stackoverflow.com/a/15982616/7462461
 $x=new XMLWriter();
 $x->openMemory();
 $x->startDocument('1.0','UTF-8');

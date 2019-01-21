@@ -21,7 +21,7 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/js/froala_editor.pkgd.min.js"></script>
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/froala-editor@2.9.1/js/plugins/image.min.js"></script>
 
-<script type="text/javascript">
+<script type="text/javascript"> //převzano z: https://stackoverflow.com/a/133997/7462461
     function post(path, params, method) {
         method = method || "post"; // Set method to post by default if not specified.
 

@@ -100,7 +100,7 @@ h1, h2, h3, h4, h5, h6, form, p, a, div, ul, li, hr, br, nav{
     resize: none;
     justify-self: unset;
 }
-
+/*převzato z: https://www.w3schools.com/*/
 table {
     border-spacing: 5px;
 }
@@ -124,6 +124,7 @@ table.tb1 th {
     color: white;
     background-color: black;
 }
+/*https://www.w3schools.com/*/
 
 .mezera{
     margin-bottom: 20px;
@@ -134,7 +135,7 @@ table.tb1 th {
     height: auto;
 }
 
-/*+registrace*/
+/*+registrace  převzato z: https://www.w3schools.com/*/
 * {box-sizing: border-box}
 
 /* Add padding to containers */
@@ -239,7 +240,7 @@ a {
 }
 /*-clanek*/
 
-/*+komentare*/
+/*+komentare převzano z: https://www.webdesignerdepot.com/2013/01/how-to-build-a-threaded-comment-block-with-html5-and-css3/*/
 
 
 #comments { display: block; }
@@ -291,5 +292,9 @@ a {
 
     .oblibene{
         display: none;
+    }
+
+    a{
+        color: #000000;
     }
 }
