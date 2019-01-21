@@ -28,12 +28,23 @@ if(!empty($_GET['ed'])){
             $stmt->bindParam(':id', $_GET['cl']);
             $stmt->execute();
             $clanek = $stmt->fetch();
+
+            $stmt2= $conn->prepare("select * from clanky_has_tagy where clanky_id_clanku = :clanek");
+            $stmt2->bindParam(':clanek', $clanek['id_clanku']);
+            $stmt2->execute();
+
+            $row = $stmt2->fetch();
+
+            $tagy = $row['tagy_tag'];
+            while ($row = $stmt2->fetch()) {
+                $tagy = $tagy . ';' . $row['tagy_tag'];
+            }
+
+            $tagy = trim($tagy);
+
             ?>
             <form method="post">
                 <div>
-                    <label for="idC"><b>ID:</b></label>
-                    <input type="number" name="idC" value='<?PHP echo $_GET['cl']; ?>' required>
-                    <br/>
                     <label for="name"><b>Název:</b></label>
                     <input type="text" name="name" value='<?PHP echo $clanek['nazev']; ?>' required>
                     <br/>
@@ -42,6 +53,9 @@ if(!empty($_GET['ed'])){
                     <br/>
                     <label for="textC"><b>Text:</b></label>
                     <input type="text" name="textC" value='<?PHP echo $clanek['text_clanku']; ?>' required>
+                    <br/>
+                    <label for="tagy"><b>Tagy:</b></label>
+                    <input type="text" name="tagy" value='<?PHP echo $tagy; ?>' required>
                     <hr/>
 
                     <button type="submit">Uložit</button>
@@ -79,9 +93,6 @@ if(!empty($_GET['ed'])){
             ?>
             <form method="post">
                 <div>
-                    <input type="number" name="idK" value='<?PHP echo $_GET['kom']; ?>' required>
-                    <label for="idK"><b>ID:</b></label>
-                    <br/>
                     <input type="text" name="textK" value='<?PHP echo $komentar['text_kom']; ?>' required>
                     <label for="textK"><b>Text:</b></label>
                     <br/>
@@ -191,23 +202,44 @@ if(!empty($_GET['ed'])){
 
 <?php
 if(!empty($_POST)){
-    if(isset($_POST['idC'])){
-        $stmt = $conn->prepare("update clanky set id_clanku = :id, nazev = :nazev, text_clanku = :text, autor_uzivatelske_jmeno = :autor");
-        $stmt->bindParam(':id', $_POST['idC']);
+    if(isset($_GET['cl'])){
+        $stmt = $conn->prepare("update clanky set nazev = :nazev, text_clanku = :text, autor_uzivatelske_jmeno = :autor where id_clanku = :id");
+        $stmt->bindParam(':id', $_GET['cl']);
         $stmt->bindParam(':nazev', $_POST['name']);
         $stmt->bindParam(':text', $_POST['textC']);
         $stmt->bindParam(':autor', $_POST['author']);
-    }elseif(isset($_POST['user'])){
-        $stmt = $conn->prepare("update registrovani_uzivatele set uzivatelske_jmeno = :un, jmeno_prijmeni = :jmeno, email = :email");
+
+        $stmt2 = $conn->prepare("DELETE FROM clanky_has_tagy where clanky_id_clanku = :cl");
+        $stmt2->bindParam(':cl', $_GET['cl']);
+        $stmt2->execute();
+
+        $tags = explode(";", $_POST["tagy"]);
+
+        foreach ($tags as $tag) {
+            $pTag = trim($tag);
+            try {
+                $stmt2 = $conn->prepare("INSERT INTO tagy values (:tag)");
+                $stmt2->bindParam(":tag", $pTag);
+                $stmt2->execute();
+            } catch (Exception $e) { }
+
+            $stmt3 = $conn->prepare("INSERT INTO clanky_has_tagy values (:idCl, :tag)");
+            $stmt3->bindParam(":idCl", $_GET['cl']);
+            $stmt3->bindParam(":tag", $pTag);
+            $stmt3->execute();
+        }
+    }elseif(isset($_GET['uz'])){
+        $stmt = $conn->prepare("update registrovani_uzivatele set uzivatelske_jmeno = :un, jmeno_prijmeni = :jmeno, email = :email where uzivatelske_jmeno = :puvUn");
         $stmt->bindParam(':un', $_POST['user']);
         $stmt->bindParam(':jmeno', $_POST['name']);
         $stmt->bindParam(':email', $_POST['mail']);
-    }elseif(isset($_POST['idK'])){
-        $stmt = $conn->prepare("update komentare set id_komentare = :id, clanky_id = :clanek, text_kom = :text, autor_uzivatelske_jmeno = :autor, komentare_id_komentare = :komentar");
+        $stmt->bindParam(':puvUn', $_GET['uz']);
+    }elseif(isset($_GET['kom'])){
+        $stmt = $conn->prepare("update komentare set clanky_id = :clanek, text_kom = :text, autor_uzivatelske_jmeno = :autor, komentare_id_komentare = :komentar where id_komentare = :id");
         $reakce = null;
         if(!empty($_POST['reactionTo']))
             $reakce = $_POST['reactionTo'];
-        $stmt->bindParam(':id', $_POST['idK']);
+        $stmt->bindParam(':id', $_GET['kom']);
         $stmt->bindParam(':clanek', $_POST['clanekID']);
         $stmt->bindParam(':text', $_POST['textK']);
         $stmt->bindParam(':autor', $_POST['authorK']);

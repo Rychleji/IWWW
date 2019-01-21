@@ -30,6 +30,18 @@ $clanek = $stmt->fetch();
         </div>
     <?php } ?>
     <br>
+    <?php
+        $stmt01 = $conn->prepare("SELECT * FROM clanky_has_tagy WHERE clanky_id_clanku = :idCl");
+
+        $stmt01->bindParam(':idCl', $_GET["clanek"]);
+        $stmt01->execute();
+    while ($row = $stmt01->fetch()) {
+        ?>
+            <b><a href="<?= BASE_URL . "?page=tagy&tag=".$row['tagy_tag']." " ?>"><?php echo $row['tagy_tag'];?></a></b>
+        <?php
+    }
+    ?>
+    <br/>
     <div class="fr-view">
         <?php echo $clanek['text_clanku']; ?>
     </div>
