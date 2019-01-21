@@ -36,7 +36,9 @@ if(isset($_POST["submit"])) {
         $stmt->bindParam(':nazev', $clanek->attributes()->nazev);
         $stmt->bindParam(':text', $clanek->attributes()->text);
         $stmt->bindParam(':autor', $clanek->attributes()->autor);
-        $stmt->execute();
+        try {
+            $stmt->execute();
+        }catch (Exception $e){}
     }
     header("Location:" . BASE_URL . "?page=administrace");
 }

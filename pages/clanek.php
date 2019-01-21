@@ -14,7 +14,7 @@ $clanek = $stmt->fetch();
 
 <article class="clanek">
     <h3 class="center nadpis"><?php echo $clanek['nazev']; ?></h3>
-    <a href="<?= BASE_URL . "?page=export&cl=".$_GET["clanek"] ?>"><img class="icons" src="pic/XMLico.png"/></a>
+    <a href="<?= "pages/export.php?cl=".$_GET["clanek"] ?>"><img class="icons" src="pic/XMLico.png" alt="XML"/></a>
     <?php
     $stmt01 = $conn->prepare("SELECT * FROM oblibene_clanky WHERE clanky_id = :idCl AND uzivatelske_jmeno_clena = :uz");
 
@@ -26,7 +26,7 @@ $clanek = $stmt->fetch();
     if(empty($ob)){
         ?>
         <div class="right">
-            <a href="<?= BASE_URL . "?page=pridatdooblibenych&c=".$clanek['id_clanku'] ?>">Přidat do oblíbených</a>
+            <a class="oblibene" href="<?= BASE_URL . "?page=pridatdooblibenych&c=".$clanek['id_clanku'] ?>">Přidat do oblíbených</a>
         </div>
     <?php } ?>
     <br>

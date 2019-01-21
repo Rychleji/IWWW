@@ -49,16 +49,18 @@
 
 <!-- Create a tag that we will use as the editable area. -->
 <!-- You can use a div tag as well. -->
-    <textfield id="froala-editor"></textfield>
+<div>
+    <div id="froala-editor"></div>
     <div class="right">
         <button type="submit" id="get-text" class="btn" onclick="post('<?= BASE_URL . '?page=pridatclanek' ?>',
-            {text: $('textfield#froala-editor').froalaEditor('html.get')})">Uložit</button>
+            {text: $('div#froala-editor').froalaEditor('html.get')})">Uložit</button>
     </div>
+</div>
 
 <!-- Initialize the editor. -->
 <script>
     $(function() {
-        $('textfield#froala-editor').froalaEditor({
+        $('div#froala-editor').froalaEditor({
             height: 500,
 
             // Set the image upload parameter.

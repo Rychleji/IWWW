@@ -233,6 +233,10 @@ a {
     font-size: larger;
     background-color: #e0e0e0;
 }
+
+.oblibene{
+
+}
 /*-clanek*/
 
 /*+komentare*/
@@ -267,3 +271,25 @@ a {
 #comments .cmmnt .cmmnt-content header .userlink { font-weight: bold; }
 #comments .cmmnt .replies { margin-bottom: 7px; }
 /*-komentare*/
+
+@media print{
+    title, nav, button, footer, form, header{
+        display:none;
+    }
+
+    .login_management{
+        display: none;
+    }
+
+    #comments{
+        display: none;
+    }
+
+    .icons{
+        display: none;
+    }
+
+    .oblibene{
+        display: none;
+    }
+}

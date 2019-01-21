@@ -3,7 +3,7 @@ ob_start();
 session_start();
 include "config.php";
 ?>
-
+<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <title><?= PAGETITLE;?></title>
